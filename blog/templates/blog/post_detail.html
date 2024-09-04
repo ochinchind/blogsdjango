@@ -250,7 +250,29 @@
                 <p>{{ post.content }}</p>
             </article>
         
-            </div>
+        </div>
+
+        <div>
+            <h2>Comments</h2>
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        <strong>{{ comment.author }}</strong> said:
+                        <p>{{ comment.text }}</p>
+                        <small>Posted on {{ comment.created_at }}</small>
+                    </li>
+                {% empty %}
+                    <li>No comments yet.</li>
+                {% endfor %}
+            </ul>
+        
+            <h3>Add a Comment</h3>
+            <form method="post" action="{% url 'add_comment' post.pk %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
   </main>
   
   <footer class="py-5 text-center text-body-secondary bg-body-tertiary">

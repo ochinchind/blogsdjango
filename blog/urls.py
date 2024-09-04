@@ -13,4 +13,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', LoginView.as_view(template_name='blog/login.html'), name='login'),
     path('logout/', LogoutView.as_view(next_page='post_list'), name='logout'),
+    path('<int:pk>/comment/', views.add_comment, name='add_comment'),
 ]
