@@ -229,9 +229,9 @@
 
     <main class="container">
         <div class="row g-5">
-            <div class="col-md-8">
-            <h3 class="pb-4 mb-4 fst-italic border-bottom">
-                {{ post.title }}
+            <div class="col-md-12">
+            <h3 class="pb-4 mb-4 fst-italic border-bottom d-flex justify-content-between">
+                <div>{{ post.title }} </div><form method="post" action="{% url 'post_delete' post.pk %}">{% csrf_token %}<button type="submit" class="ms-5 btn btn-danger">Удалить</button></form>
             </h3>
         
             <article class="blog-post">
