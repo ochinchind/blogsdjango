@@ -200,10 +200,20 @@
           <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Large</a>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="link-secondary" href="#" aria-label="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
-          </a>
-          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+            <a class="link-secondary" href="#" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title>
+                    <circle cx="10.5" cy="10.5" r="7.5"/>
+                    <path d="M21 21l-5.2-5.2"/>
+                </svg>
+            </a>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">Logout</button>
+                </form>
+            {% else %}
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'login' %}">Login</a>
+            {% endif %}
         </div>
       </div>
     </header>
@@ -231,7 +241,7 @@
         <div class="row g-5">
             <div class="col-md-12">
             <h3 class="pb-4 mb-4 fst-italic border-bottom d-flex justify-content-between">
-                <div>{{ post.title }} </div><form method="post" action="{% url 'post_delete' post.pk %}">{% csrf_token %}<button type="submit" class="ms-5 btn btn-danger">Удалить</button></form>
+                <div>{{ post.title }} </div><form method="post" action="{% url 'post_delete' post.pk %}">{% csrf_token %}<button type="submit" class="ms-5 btn btn-danger">Удалить</button> <a class="ms-5 btn btn-light" href="{% url 'post_edit' post.pk %}">Редактировать</a></form>
             </h3>
         
             <article class="blog-post">
